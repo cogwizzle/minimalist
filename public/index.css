@@ -1,0 +1,103 @@
+:root {
+    --bg: #faf9f6;
+    --font-color: #333333;
+
+    /* Spacing Measurements */
+    --spacing-0: 0;
+    --spacing-1: 0.5rem;
+    --spacing-2: calc(var(--spacing-1) * 2);
+    --spacing-3: calc(var(--spacing-2) * 2);
+    --spacing-4: calc(var(--spacing-3) * 2);
+    --spacing-5: calc(var(--spacing-4) * 2);
+    --spacing-6: calc(var(--spacing-5) * 2);
+
+    /* Shadows */
+    --shadow-color: #333333;
+    --shadow-1: 1px 1px 0px 0px var(--shadow-color);
+    --shadow-2: 2px 2px 4px 0px var(--shadow-color);
+    --shadow-3: 3px 3px 6px 0px var(--shadow-color);
+
+    /* Screen Sizes */
+  --screen-tablet: 768px;
+  --screen-desktop: 992px;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--font-color);
+    font-weight: 200;
+    font-family: 'Roboto Mono', monospace;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 h6 {
+    font-weight: 200;
+}
+
+body * {
+    box-sizing: border-box;
+}
+
+mini-drawer-layout {
+    display: flex;
+    flex-direction: row;
+    max-width: 100vw;
+}
+
+mini-drawer-layout > *:not([slot="drawer"]) {
+    flex: 1;
+}
+
+mini-drawer-layout [slot="drawer"] {
+    left: 0;
+    background-color: var(--bg);
+    box-shadow: var(--shadow-2);
+    height: 100vh;
+    position: fixed;
+    transform: translateX(100%);
+    width: 100vw;
+    transition: transform 0.3s ease-in-out;
+}
+
+mini-drawer-layout [slot="drawer"].open {
+    transform: translateX(0%);
+    display: block;
+}
+
+mini-drawer-layout [slot="drawer"].noJs {
+    background-color: var(--bg);
+    box-shadow: var(--shadow-2);
+    height: 100vh;
+    position: relative;
+    width: 320px;
+    transform: unset;
+    transition: none;
+}
+
+@media (min-width: 786px) {
+    mini-drawer-layout [slot="drawer"] {
+        width: 320px;
+        position: relative;
+        left: unset;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #333333;
+        --font-color: #ffffff;
+        --drawer-color: #222222;
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--font-color);
+    }
+
+    mini-drawer-layout [slot="drawer"] {
+        background-color: var(--drawer-color);
+    }
+}
