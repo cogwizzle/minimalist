@@ -22,6 +22,13 @@
     /* Screen Sizes */
   --screen-desktop: 992px;
   --screen-tablet: 768px;
+
+  --text-sm: 0.75rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.50rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2rem;
 }
 
 body {
@@ -33,6 +40,7 @@ body {
     padding: 0;
     width: 100vw;
     overflow-x: hidden;
+    font-size: var(--text-base);
 }
 
 body * {
