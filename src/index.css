@@ -62,25 +62,41 @@ mini-drawer-layout [slot="drawer"] {
     transition: transform 0.3s ease-in-out;
 }
 
-mini-drawer-layout [slot="drawer"].open {
+mini-drawer-layout.open [slot="drawer"] {
     transform: translateX(0%);
     display: block;
 }
 
-mini-drawer-layout [slot="drawer"].noJs {
-    background-color: var(--bg);
+mini-drawer-layout.noJs [slot="drawer"] {
+    background-color: var(--drawer-color);
     box-shadow: var(--shadow-2);
     height: 100vh;
-    position: relative;
+    position: fixed;
     width: 320px;
     transform: unset;
-    transition: none;
+    transition: none
 }
 
 @media (min-width: 786px) {
+    mini-drawer-layout > *:not([slot="drawer"]) {
+        flex: unset;
+        width: 100%;
+        transition: width 0.3s ease-in-out;
+    }
+
+    mini-drawer-layout.open > *:not([slot="drawer"]) {
+        flex: unset;
+        width: calc(100% - 320px);
+    }
+
+    mini-drawer-layout.noJs > *:not([slot="drawer"]) {
+        width: calc(100% - 320px);
+    }
+
     mini-drawer-layout [slot="drawer"] {
         width: 320px;
-        position: relative;
+        right: 0;
+        position: fixed;
         left: unset;
     }
 }
@@ -98,6 +114,10 @@ mini-drawer-layout [slot="drawer"].noJs {
     }
 
     mini-drawer-layout [slot="drawer"] {
+        background-color: var(--drawer-color);
+    }
+
+    mini-drawer-layout.noJs [slot="drawer"] {
         background-color: var(--drawer-color);
     }
 }

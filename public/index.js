@@ -18,6 +18,10 @@ class DrawerLayout extends HTMLElement {
     connectedCallback() {
         this.addEventListener('toggle-drawer', this.toggleDrawer);
         this.render();
+        // If screen width is greater than 786px, open the drawer
+        if (window.innerWidth > 786) {
+            this.toggleDrawer();
+        }
     }
 
     disconnectedCallback() {
@@ -26,8 +30,7 @@ class DrawerLayout extends HTMLElement {
     }
 
     toggleDrawer() {
-        const drawer = this.shadowRoot.querySelector('slot[name="drawer"]');
-        drawer?.assignedElements()?.[0]?.classList?.toggle('open');
+        this.classList.toggle('open');
     }
 
     render() {
@@ -38,3 +41,10 @@ class DrawerLayout extends HTMLElement {
 if (!customElements.get(DrawerLayout.is)) {
     customElements.define(DrawerLayout.is, DrawerLayout);
 }
+
+(function() {
+    const noJs = document.querySelectorAll('.noJs');
+    noJs.forEach((element) => {
+        element.classList.remove('noJs');
+    });
+})();
