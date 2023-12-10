@@ -18,8 +18,8 @@
     --shadow-3: 3px 3px 6px 0px var(--shadow-color);
 
     /* Screen Sizes */
-  --screen-tablet: 768px;
   --screen-desktop: 992px;
+  --screen-tablet: 768px;
 }
 
 body {
@@ -33,18 +33,20 @@ body {
     overflow-x: hidden;
 }
 
+body * {
+    box-sizing: border-box;
+}
+
 h1, h2, h3, h4, h5 h6 {
     font-weight: 200;
 }
 
-body * {
-    box-sizing: border-box;
-}
 
 mini-drawer-layout {
     display: flex;
     flex-direction: row;
     max-width: 100vw;
+    position: relative;
 }
 
 mini-drawer-layout > *:not([slot="drawer"]) {
@@ -52,19 +54,19 @@ mini-drawer-layout > *:not([slot="drawer"]) {
 }
 
 mini-drawer-layout [slot="drawer"] {
-    left: 0;
     background-color: var(--bg);
     box-shadow: var(--shadow-2);
     height: 100vh;
+    left: 0;
     position: fixed;
     transform: translateX(100%);
-    width: 100vw;
     transition: transform 0.3s ease-in-out;
+    width: 100vw;
 }
 
 mini-drawer-layout.open [slot="drawer"] {
-    transform: translateX(0%);
     display: block;
+    transform: translateX(0%);
 }
 
 mini-drawer-layout.noJs [slot="drawer"] {
@@ -72,16 +74,23 @@ mini-drawer-layout.noJs [slot="drawer"] {
     box-shadow: var(--shadow-2);
     height: 100vh;
     position: fixed;
-    width: 320px;
     transform: unset;
-    transition: none
+    transition: none;
+    width: 320px;
 }
 
 @media (min-width: 786px) {
+    mini-drawer-layout [slot="drawer"] {
+        left: unset;
+        position: fixed;
+        right: 0;
+        width: 320px;
+    }
+
     mini-drawer-layout > *:not([slot="drawer"]) {
         flex: unset;
-        width: 100%;
         transition: width 0.3s ease-in-out;
+        width: 100%;
     }
 
     mini-drawer-layout.open > *:not([slot="drawer"]) {
@@ -92,20 +101,13 @@ mini-drawer-layout.noJs [slot="drawer"] {
     mini-drawer-layout.noJs > *:not([slot="drawer"]) {
         width: calc(100% - 320px);
     }
-
-    mini-drawer-layout [slot="drawer"] {
-        width: 320px;
-        right: 0;
-        position: fixed;
-        left: unset;
-    }
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --bg: #333333;
-        --font-color: #ffffff;
         --drawer-color: #222222;
+        --font-color: #ffffff;
     }
 
     body {
@@ -121,3 +123,4 @@ mini-drawer-layout.noJs [slot="drawer"] {
         background-color: var(--drawer-color);
     }
 }
+
