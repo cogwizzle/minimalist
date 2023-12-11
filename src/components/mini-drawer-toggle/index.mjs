@@ -91,6 +91,5 @@ export default class DrawerToggle extends HTMLElement {
 }
 
 if (!customElements.get(DrawerToggle.is)) {
-    console.log('defining drawer toggle');
     customElements.define(DrawerToggle.is, DrawerToggle);
 }
