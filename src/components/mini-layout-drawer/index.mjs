@@ -1,10 +1,16 @@
+/**
+  * @typedef {import("./ToggleDrawerEvent.mjs").ToggleDrawerEvent} ToggleDrawerEvent
+  */
+
 const template = document.createElement('template');
 template.innerHTML = `
     <slot></slot>
     <slot name="drawer"></slot>
 `;
 
-class DrawerLayout extends HTMLElement {
+const tabletSize = 786;
+
+export default class DrawerLayout extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -19,7 +25,7 @@ class DrawerLayout extends HTMLElement {
         this.addEventListener('toggle-drawer', this.toggleDrawer);
         this.render();
         // If screen width is greater than 786px, open the drawer
-        if (window.innerWidth > 786) {
+        if (window.innerWidth > tabletSize) {
             this.toggleDrawer();
         }
     }
@@ -29,8 +35,22 @@ class DrawerLayout extends HTMLElement {
         this.removeEventListener('toggle-drawer', this.toggleDrawer);
     }
 
-    toggleDrawer() {
-        this.classList.toggle('open');
+    /**
+      * Toggle the drawer
+      * @param {ToggleDrawerEvent} [event]
+      * @returns {void}
+      */
+    toggleDrawer(event) {
+        const open = event?.detail?.open;
+        if (open === undefined) {
+            this.classList.toggle('open');
+            return;
+        }
+        if (open) {
+            this.classList.add('open');
+            return;
+        }
+        this.classList.remove('open');
     }
 
     render() {
@@ -41,10 +61,3 @@ class DrawerLayout extends HTMLElement {
 if (!customElements.get(DrawerLayout.is)) {
     customElements.define(DrawerLayout.is, DrawerLayout);
 }
-
-(function() {
-    const noJs = document.querySelectorAll('.noJs');
-    noJs.forEach((element) => {
-        element.classList.remove('noJs');
-    });
-})();
