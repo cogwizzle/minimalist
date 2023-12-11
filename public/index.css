@@ -69,6 +69,10 @@ button {
     cursor: pointer;
 }
 
+mini-drawer-toggle.noJs {
+    display: none;
+}
+
 mini-drawer-layout {
     display: flex;
     flex-direction: row;

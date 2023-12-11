@@ -41,6 +41,7 @@ export default class DrawerLayout extends HTMLElement {
       * @returns {void}
       */
     toggleDrawer(event) {
+        console.log('toggle drawer');
         const open = event?.detail?.open;
         if (open === undefined) {
             this.classList.toggle('open');
