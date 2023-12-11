@@ -31,7 +31,6 @@ export default class DrawerLayout extends HTMLElement {
     }
 
     disconnectedCallback() {
-        console.log('disconnected');
         this.removeEventListener('toggle-drawer', this.toggleDrawer);
     }
 
@@ -41,7 +40,6 @@ export default class DrawerLayout extends HTMLElement {
       * @returns {void}
       */
     toggleDrawer(event) {
-        console.log('toggle drawer');
         const open = event?.detail?.open;
         if (open === undefined) {
             this.classList.toggle('open');
