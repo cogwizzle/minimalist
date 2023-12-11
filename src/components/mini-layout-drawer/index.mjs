@@ -15,6 +15,9 @@ export default class DrawerLayout extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+        if (this.classList.contains('noJs')) {
+            this.classList.remove('noJs');
+        }
     }
 
     static get is() {
