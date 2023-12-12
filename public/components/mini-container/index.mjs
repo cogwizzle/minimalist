@@ -1,0 +1,19 @@
+const template = document.createElement('template');
+template.innerHTML = `<slot></slot>`;
+
+class MiniContainer extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.innerHTML = template.cloneNode(true).innerHTML;
+  }
+
+  static get is() {
+    return 'mini-container';
+  }
+}
+
+if (!customElements.get(MiniContainer.is)) {
+  customElements.define(MiniContainer.is, MiniContainer);
+}
+
