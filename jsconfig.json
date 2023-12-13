@@ -11,5 +11,5 @@
     "strictNullChecks": true,
     "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "docs", "thinking"]
+  "exclude": ["node_modules"]
 }
