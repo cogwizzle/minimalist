@@ -13,56 +13,56 @@ template.innerHTML = `
 const tabletSize = 786
 
 export default class DrawerLayout extends MiniComponent {
-  constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
-    this.shadowRoot?.appendChild(template.content.cloneNode(true))
-  }
-
-  static get is() {
-    return 'mini-drawer-layout'
-  }
-
-  connectedCallback() {
-    this.addEventListener('toggle-drawer', () => this.toggleDrawer())
-    this.render()
-    // If screen width is greater than 786px, open the drawer
-    if (window.innerWidth > tabletSize) {
-      this.toggleDrawer()
+    constructor() {
+        super()
+        this.attachShadow({ mode: 'open' })
+        this.shadowRoot?.appendChild(template.content.cloneNode(true))
     }
-  }
 
-  disconnectedCallback() {
-    this.removeEventListener('toggle-drawer', () => this.toggleDrawer())
-  }
+    static get is() {
+        return 'mini-drawer-layout'
+    }
 
-  /**
-   * Toggle the drawer
-   * @param {ToggleDrawerEvent} [event]
-   * @returns {void}
-   */
-  toggleDrawer(event) {
-    const open = event?.detail?.open
-    if (open === undefined) {
-      this.classList.toggle('open')
-      return
+    connectedCallback() {
+        this.addEventListener('toggle-drawer', () => this.toggleDrawer())
+        this.render()
+        // If screen width is greater than 786px, open the drawer
+        if (window.innerWidth > tabletSize) {
+            this.toggleDrawer()
+        }
     }
-    if (open) {
-      this.classList.add('open')
-      return
-    }
-    this.classList.remove('open')
-  }
 
-  render() {
-    const clonedNode = template.content.cloneNode(true)
-    if (!(this.shadowRoot && clonedNode instanceof HTMLElement)) {
-      return
+    disconnectedCallback() {
+        this.removeEventListener('toggle-drawer', () => this.toggleDrawer())
     }
-    this.shadowRoot.innerHTML = clonedNode.innerHTML
-  }
+
+    /**
+     * Toggle the drawer
+     * @param {ToggleDrawerEvent} [event]
+     * @returns {void}
+     */
+    toggleDrawer(event) {
+        const open = event?.detail?.open
+        if (open === undefined) {
+            this.classList.toggle('open')
+            return
+        }
+        if (open) {
+            this.classList.add('open')
+            return
+        }
+        this.classList.remove('open')
+    }
+
+    render() {
+        const clonedNode = template.content.cloneNode(true)
+        if (!(this.shadowRoot && clonedNode instanceof HTMLElement)) {
+            return
+        }
+        this.shadowRoot.innerHTML = clonedNode.innerHTML
+    }
 }
 
 if (!customElements.get(DrawerLayout.is)) {
-  customElements.define(DrawerLayout.is, DrawerLayout)
+    customElements.define(DrawerLayout.is, DrawerLayout)
 }

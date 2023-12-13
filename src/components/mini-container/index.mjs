@@ -14,19 +14,19 @@ template.innerHTML = `
 `
 
 class MiniContainer extends MiniComponent {
-  constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
-    if (this.shadowRoot) {
-      this.shadowRoot.appendChild(template.content.cloneNode(true))
+    constructor() {
+        super()
+        this.attachShadow({ mode: 'open' })
+        if (this.shadowRoot) {
+            this.shadowRoot.appendChild(template.content.cloneNode(true))
+        }
     }
-  }
 
-  static get is() {
-    return 'mini-container'
-  }
+    static get is() {
+        return 'mini-container'
+    }
 }
 
 if (!customElements.get(MiniContainer.is)) {
-  customElements.define(MiniContainer.is, MiniContainer)
+    customElements.define(MiniContainer.is, MiniContainer)
 }

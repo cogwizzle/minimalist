@@ -34,72 +34,72 @@ closeTemplate.innerHTML = `
 `
 
 export default class DrawerToggle extends MiniComponent {
-  constructor() {
-    super()
-    this.attachShadow({ mode: 'open' })
-  }
-
-  static get is() {
-    return 'mini-drawer-toggle'
-  }
-
-  attachEvents() {
-    const button = this.shadowRoot?.querySelector('button')
-    if (!button) {
-      return
+    constructor() {
+        super()
+        this.attachShadow({ mode: 'open' })
     }
-    button.addEventListener('click', this.toggleDrawer.bind(this))
-  }
 
-  removeEvents() {
-    const button = this.shadowRoot?.querySelector('button')
-    if (!button) {
-      return
+    static get is() {
+        return 'mini-drawer-toggle'
     }
-    button.removeEventListener('click', this.toggleDrawer.bind(this))
-  }
 
-  connectedCallback() {
-    this.render()
-  }
-
-  disconnectedCallback() {
-    this.removeEvents()
-  }
-
-  toggleDrawer() {
-    const drawer = document.querySelector('mini-drawer-layout')
-    if (!drawer || !(drawer instanceof DrawerLayout)) {
-      return
-    }
-    drawer.toggleDrawer(new ToggleDrawerEvent())
-    this.render()
-  }
-
-  render() {
-    this.removeEvents()
-    const drawer = document.querySelector('mini-drawer-layout')
-    if (!drawer) {
-      return
-    }
-    const isOpen = drawer.classList.contains('open')
-    if (this.shadowRoot) {
-      if (isOpen) {
-        const clonedNode = closeTemplate.cloneNode(true)
-        if (clonedNode instanceof HTMLElement) {
-          this.shadowRoot.innerHTML = clonedNode.innerHTML
+    attachEvents() {
+        const button = this.shadowRoot?.querySelector('button')
+        if (!button) {
+            return
         }
-      } else {
-        const clonedNode = openTemplate.cloneNode(true)
-        if (clonedNode instanceof HTMLElement) {
-          this.shadowRoot.innerHTML = clonedNode.innerHTML
-        }
-      }
+        button.addEventListener('click', this.toggleDrawer.bind(this))
     }
-    this.attachEvents()
-  }
+
+    removeEvents() {
+        const button = this.shadowRoot?.querySelector('button')
+        if (!button) {
+            return
+        }
+        button.removeEventListener('click', this.toggleDrawer.bind(this))
+    }
+
+    connectedCallback() {
+        this.render()
+    }
+
+    disconnectedCallback() {
+        this.removeEvents()
+    }
+
+    toggleDrawer() {
+        const drawer = document.querySelector('mini-drawer-layout')
+        if (!drawer || !(drawer instanceof DrawerLayout)) {
+            return
+        }
+        drawer.toggleDrawer(new ToggleDrawerEvent())
+        this.render()
+    }
+
+    render() {
+        this.removeEvents()
+        const drawer = document.querySelector('mini-drawer-layout')
+        if (!drawer) {
+            return
+        }
+        const isOpen = drawer.classList.contains('open')
+        if (this.shadowRoot) {
+            if (isOpen) {
+                const clonedNode = closeTemplate.cloneNode(true)
+                if (clonedNode instanceof HTMLElement) {
+                    this.shadowRoot.innerHTML = clonedNode.innerHTML
+                }
+            } else {
+                const clonedNode = openTemplate.cloneNode(true)
+                if (clonedNode instanceof HTMLElement) {
+                    this.shadowRoot.innerHTML = clonedNode.innerHTML
+                }
+            }
+        }
+        this.attachEvents()
+    }
 }
 
 if (!customElements.get(DrawerToggle.is)) {
-  customElements.define(DrawerToggle.is, DrawerToggle)
+    customElements.define(DrawerToggle.is, DrawerToggle)
 }
