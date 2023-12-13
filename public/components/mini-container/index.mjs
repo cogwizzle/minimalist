@@ -1,6 +1,6 @@
-import MiniComponent from "../MiniComponent.mjs";
+import MiniComponent from '../MiniComponent.mjs'
 
-const template = document.createElement('template');
+const template = document.createElement('template')
 template.innerHTML = `
     <slot></slot>
     <style>
@@ -11,21 +11,22 @@ template.innerHTML = `
             width: 100%;
         }
     </style>
-`;
+`
 
 class MiniContainer extends MiniComponent {
   constructor() {
-    super();
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.innerHTML = template.cloneNode(true).innerHTML;
+    super()
+    this.attachShadow({ mode: 'open' })
+    if (this.shadowRoot) {
+      this.shadowRoot.appendChild(template.content.cloneNode(true))
+    }
   }
 
   static get is() {
-    return 'mini-container';
+    return 'mini-container'
   }
 }
 
 if (!customElements.get(MiniContainer.is)) {
-  customElements.define(MiniContainer.is, MiniContainer);
+  customElements.define(MiniContainer.is, MiniContainer)
 }
-

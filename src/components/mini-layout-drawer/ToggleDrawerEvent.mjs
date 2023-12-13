@@ -2,11 +2,12 @@
   * @typedef {object} ToggleDrawerEventDetail
   * @property {boolean|undefined} open
   *
-  * @typedef {CustomEvent<ToggleDrawerEventDetail>} ToggleDrawerEvent
   */
 
 /**
   * Toggle the drawer.
+  *
+  * @extends {CustomEvent<ToggleDrawerEventDetail>}
   */
 export default class ToggleDrawerEvent extends CustomEvent {
     /**
