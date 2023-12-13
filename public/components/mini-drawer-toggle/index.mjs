@@ -1,4 +1,5 @@
 import ToggleDrawerEvent from '../mini-layout-drawer/ToggleDrawerEvent.mjs';
+import MiniComponent from '../MiniComponent.mjs';
 
 const styles = `
     <style>
@@ -31,7 +32,7 @@ closeTemplate.innerHTML = `
     ${styles}
 `;
 
-export default class DrawerToggle extends HTMLElement {
+export default class DrawerToggle extends MiniComponent {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });

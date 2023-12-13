@@ -1,3 +1,5 @@
+import MiniComponent from "../MiniComponent.mjs";
+
 /**
   * @typedef {import("./ToggleDrawerEvent.mjs").ToggleDrawerEvent} ToggleDrawerEvent
   */
@@ -10,14 +12,10 @@ template.innerHTML = `
 
 const tabletSize = 786;
 
-export default class DrawerLayout extends HTMLElement {
+export default class DrawerLayout extends MiniComponent {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-        if (this.classList.contains('noJs')) {
-            this.classList.remove('noJs');
-        }
     }
 
     static get is() {

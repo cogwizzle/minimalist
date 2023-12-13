@@ -1,3 +1,5 @@
+import MiniComponent from "../MiniComponent.mjs";
+
 const template = document.createElement('template');
 template.innerHTML = `
     <slot></slot>
@@ -11,7 +13,7 @@ template.innerHTML = `
     </style>
 `;
 
-class MiniContainer extends HTMLElement {
+class MiniContainer extends MiniComponent {
   constructor() {
     super();
     this.attachShadow({mode: 'open'});
