@@ -5,7 +5,6 @@
  * Creates a Shadow DOM for the component.
  *
  * @mixin
- * @function
  * @template {Component} T
  * @param {T} Base - The base class to extend.
  * @param {ShadowRootMode} [mode='open'] - The shadow root mode.
@@ -18,8 +17,8 @@ export function ShadowComponentMixin(Base, mode = 'open') {
      */
     class ShadowComponent extends Base {
         /**
-          * @type {ShadowRoot}
-          */
+         * @type {ShadowRoot}
+         */
         shadowRoot
         constructor(...args) {
             super(...args)

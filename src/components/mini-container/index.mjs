@@ -14,7 +14,7 @@ template.innerHTML = `
     </style>
 `
 
-class MiniContainer extends MiniComponentMixin(ShadowComponentMixin(HTMLElement)) {
+export default class MiniContainer extends MiniComponentMixin(ShadowComponentMixin(HTMLElement)) {
     constructor() {
         super()
         this.shadowRoot.appendChild(template.content.cloneNode(true))

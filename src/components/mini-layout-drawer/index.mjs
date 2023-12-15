@@ -12,7 +12,9 @@ template.innerHTML = `
 
 const tabletSize = 786
 
-class DrawerLayout extends ShadowComponentMixin(MiniComponentMixin(HTMLElement)) {
+export default class DrawerLayout extends ShadowComponentMixin(
+    MiniComponentMixin(HTMLElement)
+) {
     constructor() {
         super()
         this.shadowRoot?.appendChild(template.content.cloneNode(true))
