@@ -1,5 +1,5 @@
-import MiniComponent from '../MiniComponent.mjs'
-
+import { MiniComponentMixin } from '../MiniComponent.mjs'
+import { ShadowComponentMixin } from '../ShadowComponent.mjs'
 /**
  * @typedef {import("./ToggleDrawerEvent.mjs").default} ToggleDrawerEvent
  */
@@ -12,10 +12,9 @@ template.innerHTML = `
 
 const tabletSize = 786
 
-export default class DrawerLayout extends MiniComponent {
+class DrawerLayout extends ShadowComponentMixin(MiniComponentMixin(HTMLElement)) {
     constructor() {
         super()
-        this.attachShadow({ mode: 'open' })
         this.shadowRoot?.appendChild(template.content.cloneNode(true))
     }
 
@@ -56,7 +55,7 @@ export default class DrawerLayout extends MiniComponent {
 
     render() {
         const clonedNode = template.content.cloneNode(true)
-        if (!(this.shadowRoot && clonedNode instanceof HTMLElement)) {
+        if (!(clonedNode instanceof HTMLElement)) {
             return
         }
         this.shadowRoot.innerHTML = clonedNode.innerHTML

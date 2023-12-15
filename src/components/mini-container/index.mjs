@@ -1,4 +1,5 @@
-import MiniComponent from '../MiniComponent.mjs'
+import { MiniComponentMixin } from '../MiniComponent.mjs'
+import { ShadowComponentMixin } from '../ShadowComponent.mjs'
 
 const template = document.createElement('template')
 template.innerHTML = `
@@ -13,13 +14,10 @@ template.innerHTML = `
     </style>
 `
 
-class MiniContainer extends MiniComponent {
+class MiniContainer extends MiniComponentMixin(ShadowComponentMixin(HTMLElement)) {
     constructor() {
         super()
-        this.attachShadow({ mode: 'open' })
-        if (this.shadowRoot) {
-            this.shadowRoot.appendChild(template.content.cloneNode(true))
-        }
+        this.shadowRoot.appendChild(template.content.cloneNode(true))
     }
 
     static get is() {

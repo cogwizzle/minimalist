@@ -1,6 +1,7 @@
 import DrawerLayout from '../mini-layout-drawer/index.mjs'
 import ToggleDrawerEvent from '../mini-layout-drawer/ToggleDrawerEvent.mjs'
-import MiniComponent from '../MiniComponent.mjs'
+import { MiniComponentMixin } from '../MiniComponent.mjs'
+import { ShadowComponentMixin } from '../ShadowComponent.mjs'
 
 const styles = `
     <style>
@@ -33,10 +34,9 @@ closeTemplate.innerHTML = `
     ${styles}
 `
 
-export default class DrawerToggle extends MiniComponent {
+export default class DrawerToggle extends ShadowComponentMixin(MiniComponentMixin(HTMLElement)) {
     constructor() {
         super()
-        this.attachShadow({ mode: 'open' })
     }
 
     static get is() {
@@ -83,17 +83,15 @@ export default class DrawerToggle extends MiniComponent {
             return
         }
         const isOpen = drawer.classList.contains('open')
-        if (this.shadowRoot) {
-            if (isOpen) {
-                const clonedNode = closeTemplate.cloneNode(true)
-                if (clonedNode instanceof HTMLElement) {
-                    this.shadowRoot.innerHTML = clonedNode.innerHTML
-                }
-            } else {
-                const clonedNode = openTemplate.cloneNode(true)
-                if (clonedNode instanceof HTMLElement) {
-                    this.shadowRoot.innerHTML = clonedNode.innerHTML
-                }
+        if (isOpen) {
+            const clonedNode = closeTemplate.cloneNode(true)
+            if (clonedNode instanceof HTMLElement) {
+                this.shadowRoot.innerHTML = clonedNode.innerHTML
+            }
+        } else {
+            const clonedNode = openTemplate.cloneNode(true)
+            if (clonedNode instanceof HTMLElement) {
+                this.shadowRoot.innerHTML = clonedNode.innerHTML
             }
         }
         this.attachEvents()
