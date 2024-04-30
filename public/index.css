@@ -58,7 +58,6 @@ h5 h6 {
 
 a {
     color: var(--link-color);
-    text-decoration: none;
 }
 
 a:visited {
@@ -167,6 +166,10 @@ nav[popover] > ul {
 
 nav[popover] > ul li {
     font-size: var(--text-xl);
+}
+
+nav[popover] > ul li a {
+    text-decoration: none;
 }
 
 @media (min-width: 786px) {
